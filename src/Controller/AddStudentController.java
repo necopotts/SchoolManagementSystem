@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import Model.DatabaseConnection;
 import javafx.fxml.FXML;
@@ -62,12 +65,15 @@ public class AddStudentController implements Initializable {
             addMessage.setText("Please input student full name");
         }
         addStudent();
+        addButton.getScene().getWindow().hide();
 
     }
 
     private void addStudent() {
+
         String studentName = fullnameTextField.getText();
-        Date studentDateOfBirth = Date.valueOf(dateOfBirthDatePicker.getValue());
+        Date studentDateOfBirth = java.sql.Date.valueOf(dateOfBirthDatePicker.getValue());
+
         String studentMajor = majorChoiceBox.getValue().toString();
         String studentProgram = programChoiceBox.getValue().toString();
         try {
@@ -80,6 +86,7 @@ public class AddStudentController implements Initializable {
             preparedStatement.setString(4, studentProgram);
             preparedStatement.executeUpdate();
             addMessage.setText("Student added");
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

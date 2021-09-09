@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import DAO.Student;
@@ -19,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.converter.LocalDateStringConverter;
 
 public class StudentTableController implements Initializable {
 
@@ -61,18 +64,19 @@ public class StudentTableController implements Initializable {
     @FXML
     private Text programText;
 
-    private DatabaseConnection database;
+    private Student currentStudent;
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
 
     @FXML
     public void studentClicked(MouseEvent event) {
-        Student currentStudent = studentTable.getSelectionModel().getSelectedItem();
+        currentStudent = studentTable.getSelectionModel().getSelectedItem();
         studentIDText.setText(currentStudent.getStudentID().toString());
         fullnameText.setText(currentStudent.getFullname());
         dateOfBirthText.setText(currentStudent.getDateOfBirth().toString());
         majorText.setText(currentStudent.getMajor());
         programText.setText(currentStudent.getProgram());
         editStudentButton.setDisable(false);
+
     }
 
     @Override
@@ -101,7 +105,8 @@ public class StudentTableController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
-            stage.show();
+            stage.setOnHidden(evt -> loadData());
+            stage.showAndWait();
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -115,7 +120,44 @@ public class StudentTableController implements Initializable {
     }
 
     public void editStudentButtonOnAction(ActionEvent event) {
-        openScene("/View/EditStudentStage.fxml");
+
+        // FXMLLoader loader = new FXMLLoader();
+        // loader.setLocation(getClass().getResource("/View/EditStudentStage.fxml"));
+        // try {
+        // Node node = (Node) event.getSource();
+        // Stage stage = (Stage) node.getScene().getWindow();
+        // Parent studentTableParent = loader.load();
+        // Scene editStudentScene = new Scene(studentTableParent);
+
+        // // access to edit student controller
+        // EditStudentController controller = loader.getController();
+        // controller.initData(currentStudent);
+        // loader.setController(controller);
+
+        // stage.setScene(editStudentScene);
+        // stage.show();
+
+        // } catch (IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        try {
+
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EditStudentStage.fxml"));
+            Parent root = loader.load();
+            EditStudentController editStudentController = (EditStudentController) loader.getController();
+            editStudentController.initData(currentStudent);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.setOnHidden(evt -> loadData());
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
     }
 
