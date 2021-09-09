@@ -1,0 +1,17 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.base.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.controls.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.fxml.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.graphics.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.media.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
+        "d:\\Library\\Java\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar",
+        "d:\\Library\\Java\\sqljdbc_9.4\\enu\\mssql-jdbc-9.4.0.jre11.jar",
+        "d:\\Library\\Java\\charm-glisten-4.4.1.jar"
+    ]
+}

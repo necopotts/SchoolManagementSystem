@@ -1,0 +1,9 @@
+.homepageButton:hover {
+  -fx-background-color: #081439;
+}
+.homepageButton {
+  -fx-background-color: #112b5f;
+}
+/* .homepageButton:pressed {
+  -fx-background-color: #081439;
+} */

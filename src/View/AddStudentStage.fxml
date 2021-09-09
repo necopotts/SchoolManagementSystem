@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/PaneStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddStudentController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #112B5F;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label prefHeight="71.0" prefWidth="381.0" text="Add Student" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="40.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="7.0" layoutY="120.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Full name" wrappingWidth="150.93673706054688">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TextField fx:id="fullnameTextField" prefHeight="34.0" prefWidth="410.0" style="-fx-border-radius: 50px;" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="17.0" layoutY="170.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth" wrappingWidth="150.93673706054688">
+               <font>
+                  <Font size="20.0" /> 
+               </font>
+            </Text>
+            <DatePicker fx:id="dateOfBirthDatePicker" prefHeight="26.0" prefWidth="150.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="27.0" layoutY="220.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Major" wrappingWidth="150.93673706054688">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="majorChoiceBox" prefHeight="26.0" prefWidth="150.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="27.0" layoutY="270.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Program" wrappingWidth="150.93673706054688">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ChoiceBox fx:id="programChoiceBox" prefHeight="26.0" prefWidth="150.0" />
+         </children>
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+      <Button fx:id="addButton" layoutX="502.0" layoutY="350.0" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="38.0" prefWidth="78.0" styleClass="paneButton" text="Add" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resource/icons8-plus-+-96.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="resetButton" layoutX="415.0" layoutY="350.0" mnemonicParsing="false" onAction="#resetButtonOnAction" prefHeight="38.0" prefWidth="78.0" styleClass="paneButton" text="Reset" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resource/icons8-reset-96.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <HBox alignment="CENTER" layoutY="311.0" prefHeight="30.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="addMessage" alignment="CENTER" prefHeight="18.0" prefWidth="750.0" style="-fx-text-fill: red;" textFill="RED">
+               <font>
+                  <Font name="System Italic" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
