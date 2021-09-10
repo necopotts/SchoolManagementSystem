@@ -105,7 +105,10 @@ public class StudentTableController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setOnHidden(evt -> loadData());
+            stage.setOnHidden(evt -> {
+                studentTable.getItems().clear();
+                loadData();
+            });
             stage.showAndWait();
 
         } catch (IOException e) {
@@ -151,7 +154,10 @@ public class StudentTableController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setOnHidden(evt -> loadData());
+            stage.setOnHidden(evt -> {
+                studentTable.getItems().clear();
+                loadData();
+            });
             stage.showAndWait();
 
         } catch (IOException e) {
