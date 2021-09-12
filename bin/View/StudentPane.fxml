@@ -30,19 +30,19 @@
          <children>
             <TableView fx:id="studentTable" onMouseClicked="#studentClicked" prefHeight="187.0" prefWidth="455.0" style="-fx-alignment: center;" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
               <columns>
-                <TableColumn fx:id="idColumn" prefWidth="62.4000244140625" style="-fx-alignment: center;" styleClass="column-header" text="ID" />
-                <TableColumn fx:id="fullnameColumn" prefWidth="108.79998779296875" style="-fx-alignment: center;" styleClass="column-header" text="Full name" />
+                <TableColumn fx:id="studentIdColumn" prefWidth="70.4000244140625" style="-fx-alignment: center;" styleClass="column-header" text="Student ID" />
+                <TableColumn fx:id="fullnameColumn" prefWidth="101.5999755859375" style="-fx-alignment: center;" styleClass="column-header" text="Full name" />
                   <TableColumn fx:id="dateOfBirthColumn" prefWidth="104.79998779296875" style="-fx-alignment: center;" styleClass="column-header" text="Date of birth" />
                   <TableColumn fx:id="majorColumn" minWidth="0.800048828125" prefWidth="61.60003662109375" style="-fx-alignment: center;" styleClass="column-header" text="Major" />
                   <TableColumn fx:id="programColumn" prefWidth="60.0" style="-fx-alignment: center;" styleClass="column-header" text="Program" />
               </columns>
             </TableView>
-            <TextField prefHeight="26.0" prefWidth="257.0" promptText="Search" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <TextField fx:id="searchTextField" prefHeight="26.0" prefWidth="257.0" promptText="Search" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="16.0" prefWidth="0.0" style="-fx-border-radius: 50px;" styleClass="paneButton" GridPane.halignment="RIGHT">
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonOnAction" prefHeight="16.0" prefWidth="0.0" style="-fx-border-radius: 50px;" styleClass="paneButton" GridPane.halignment="RIGHT">
                <graphic>
                   <ImageView fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>
