@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -53,6 +54,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.converter.LocalDateStringConverter;
@@ -174,13 +176,21 @@ public class StudentTableController implements Initializable {
 
     }
 
-    public void exportButtonOnAction() {
+    public void exportButtonOnAction(ActionEvent event) {
         HSSFWorkbook workbook = new HSSFWorkbook();
-        exportToExcel(workbook);
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // get current stage
+        File selectedDirectory = directoryChooser.showDialog(stage);
+        if (selectedDirectory == null) {
+            System.out.println("No path choose");
+        } else {
+            String URL = convertFromBackslashToSlash(selectedDirectory.getAbsolutePath());
+            exportToExcel(workbook, URL);
+        }
 
     }
 
-    private void exportToExcel(HSSFWorkbook workbook) {
+    private void exportToExcel(HSSFWorkbook workbook, String URL) {
         HSSFSheet spreadsheet = workbook.createSheet("Sheet1");
         StyleWorkBook styleWorkBook = new StyleWorkBook(new HashMap<String, CellStyle>(), workbook);
         cellStyles = styleWorkBook.getCellStyles();
@@ -227,7 +237,7 @@ public class StudentTableController implements Initializable {
 
         }
         try {
-            FileOutputStream fileOut = new FileOutputStream("D:/Documents/IU/StudentIU.xls");
+            FileOutputStream fileOut = new FileOutputStream(URL + "/StudentIU.xls");
             workbook.write(fileOut);
             fileOut.flush();
             fileOut.close();
@@ -324,6 +334,10 @@ public class StudentTableController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDatabase = connectNow.getConnection();
         return connectDatabase;
+    }
+
+    public String convertFromBackslashToSlash(String string) {
+        return string.replaceAll("\\\\", "/");
     }
 
     public static boolean isNumeric(String str) {

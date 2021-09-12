@@ -79,8 +79,8 @@ public class StyleWorkBook {
         CellStyle roomStyle = this.workbook.createCellStyle();
         HSSFFont roomFont = this.workbook.createFont();
         roomFont.setBold(true);
+        roomFont.setFontHeightInPoints((short) 11);
         roomFont.setUnderline(HSSFFont.U_SINGLE);
-        roomStyle.cloneStyleFrom(schoolStyle);
         roomStyle.setFont(roomFont);
         cellStyles.put("Room cell", roomStyle);
 
