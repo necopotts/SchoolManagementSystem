@@ -94,7 +94,8 @@ public class StudentTableController implements Initializable {
 
     private Student currentStudent;
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
-    HashMap<String, CellStyle> cellStyles = new HashMap<String, CellStyle>();
+
+    private HashMap<String, CellStyle> cellStyles;
 
     @FXML
     public void studentClicked(MouseEvent event) {
@@ -181,8 +182,8 @@ public class StudentTableController implements Initializable {
 
     private void exportToExcel(HSSFWorkbook workbook) {
         HSSFSheet spreadsheet = workbook.createSheet("Sheet1");
-
-        cellStyleCreate(workbook);
+        StyleWorkBook styleWorkBook = new StyleWorkBook(new HashMap<String, CellStyle>(), workbook);
+        cellStyles = styleWorkBook.getCellStyles();
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -193,11 +194,6 @@ public class StudentTableController implements Initializable {
         // create No column
         row.createCell(0).setCellValue("No");
         row.getCell(0).setCellStyle(cellStyles.get("Title cell"));
-        // for (int i = 0; i < studentTable.getItems().size(); i++) {
-        // row = spreadsheet.createRow(i + 4);
-        // row.createCell(0).setCellValue(i);
-        // row.getCell(0).setCellStyle(cellStyles.get("Normal cell"));
-        // }
 
         // Set titles of column
         for (int i = 0; i < studentTable.getColumns().size(); i++) {
@@ -257,68 +253,6 @@ public class StudentTableController implements Initializable {
         spreadsheet.addMergedRegion(
                 new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, studentTable.getColumns().size()));
         row.getCell(0).setCellStyle(cellStyles.get("Header cell"));
-
-    }
-
-    private void cellStyleCreate(HSSFWorkbook workbook) {
-        CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        cellStyle.setAlignment(HorizontalAlignment.CENTER);
-        cellStyle.setFillBackgroundColor(IndexedColors.DARK_BLUE.getIndex());
-        cellStyle.setBorderTop(BorderStyle.THIN);
-        cellStyle.setBorderBottom(BorderStyle.THIN);
-        cellStyle.setBorderLeft(BorderStyle.THIN);
-        cellStyle.setBorderRight(BorderStyle.THIN);
-        HSSFFont normalFont = workbook.createFont();
-        normalFont.setFontHeightInPoints((short) 11);
-        cellStyle.setFont(normalFont);
-        // cellStyle.setShrinkToFit(true);
-        cellStyles.put("Normal cell", cellStyle);
-
-        // date format
-        CellStyle dateFormatStyle = workbook.createCellStyle();
-        CreationHelper createHelper = workbook.getCreationHelper();
-        dateFormatStyle.cloneStyleFrom(cellStyle);
-        dateFormatStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/mm/yyyy"));
-        cellStyles.put("Date cell", dateFormatStyle);
-
-        // title cell
-        CellStyle titleStyle = workbook.createCellStyle();
-        titleStyle.cloneStyleFrom(cellStyle);
-        HSSFFont titleFont = workbook.createFont();
-        titleFont.setBold(true);
-        // titleFont.setFontHeightInPoints((short) 14);
-        titleStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
-        titleStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        titleStyle.setFont(titleFont);
-        cellStyles.put("Title cell", titleStyle);
-
-        // School cell
-        CellStyle schoolStyle = workbook.createCellStyle();
-        HSSFFont schoolFont = workbook.createFont();
-        schoolFont.setFontHeightInPoints((short) 11);
-        schoolStyle.setFont(schoolFont);
-        cellStyles.put("School cell", schoolStyle);
-
-        // Room cell
-        CellStyle roomStyle = workbook.createCellStyle();
-        HSSFFont roomFont = workbook.createFont();
-        roomFont.setBold(true);
-        roomFont.setUnderline(HSSFFont.U_SINGLE);
-        roomStyle.cloneStyleFrom(schoolStyle);
-        roomStyle.setFont(roomFont);
-        cellStyles.put("Room cell", roomStyle);
-
-        // Header cell
-        CellStyle headerStyle = workbook.createCellStyle();
-        HSSFFont headerFont = workbook.createFont();
-        headerFont.setBold(true);
-        headerStyle.cloneStyleFrom(schoolStyle);
-        headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        headerStyle.setAlignment(HorizontalAlignment.CENTER);
-        headerStyle.setWrapText(true);
-        headerStyle.setFont(headerFont);
-        cellStyles.put("Header cell", headerStyle);
 
     }
 
