@@ -48,16 +48,20 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import javafx.util.converter.LocalDateStringConverter;
 
 public class StudentTableController implements Initializable {
@@ -74,6 +78,8 @@ public class StudentTableController implements Initializable {
     private TableColumn<Student, String> majorColumn;
     @FXML
     private TableColumn<Student, String> programColumn;
+    @FXML
+    private TableColumn<Student, Void> transcriptButtonColumn;
     @FXML
     private Button addStudentButton;
     @FXML
@@ -358,6 +364,61 @@ public class StudentTableController implements Initializable {
             System.out.println("cannot access to the database");
             e.printStackTrace();
         }
+        addButtonToTable();
+    }
+
+    private void addButtonToTable() {
+        Callback<TableColumn<Student, Void>, TableCell<Student, Void>> cellFactory = new Callback<TableColumn<Student, Void>, TableCell<Student, Void>>() {
+
+            @Override
+            public TableCell<Student, Void> call(TableColumn<Student, Void> arg0) {
+                Image img = new Image("Resource/icons8-list-64.png");
+                ImageView transcriptImageView = new ImageView(img);
+                transcriptImageView.setFitHeight(13);
+                transcriptImageView.setFitWidth(15);
+                transcriptImageView.setPreserveRatio(true);
+                final Button button = new Button("");
+                button.setPrefWidth(30);
+                button.setPrefHeight(20);
+                button.setMinHeight(20);
+                button.setMinWidth(30);
+                button.setGraphic(transcriptImageView);
+
+                // TODO Auto-generated method stub
+                final TableCell<Student, Void> cell = new TableCell<Student, Void>() {
+                    // Image img = new Image("Resource/icons8-list-64.png");
+                    // ImageView transcriptImageView = new ImageView(img);
+                    // transcriptImageView.setFitHeight(10);
+                    // transcriptImageView.setFitWeight(10);
+                    // transcriptImageView.setPreserveRatio(true);
+
+                    // private final Button btn = new Button("");
+
+                    // btn.setGraphic(transcriptImageView);
+
+                    {
+                        button.setOnAction((ActionEvent event) -> {
+                            // Student data = getTableView().getItems().get(getIndex());
+                            // System.out.println("selectedData: " + data.getStudentID());
+                            openScene("/View/TranscriptStudentStage.fxml");
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(button);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        transcriptButtonColumn.setCellFactory(cellFactory);
 
     }
 

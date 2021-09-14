@@ -117,12 +117,12 @@
       <TableView fx:id="studentTable" layoutY="233.0" onMouseClicked="#studentClicked" prefHeight="178.0" prefWidth="461.0" style="-fx-alignment: center;" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="233.0">
          <columns>
             <TableColumn fx:id="studentIdColumn" prefWidth="70.4000244140625" style="-fx-alignment: center;" styleClass="column-header" text="Student ID" />
-            <TableColumn fx:id="fullnameColumn" prefWidth="101.5999755859375" style="-fx-alignment: center;" styleClass="column-header" text="Full name" />
-            <TableColumn fx:id="dateOfBirthColumn" prefWidth="104.79998779296875" style="-fx-alignment: center;" styleClass="column-header" text="Date of birth" />
-            <TableColumn fx:id="majorColumn" minWidth="0.800048828125" prefWidth="61.60003662109375" style="-fx-alignment: center;" styleClass="column-header" text="Major" />
-            <TableColumn fx:id="programColumn" prefWidth="59.20001220703125" style="-fx-alignment: center;" styleClass="column-header" text="Program" />
-            <TableColumn fx:id="gpaColumn" prefWidth="59.20001220703125" style="-fx-alignment: center;" styleClass="column-header" text="GPA" />
-            <TableColumn fx:id="buttonColumn" prefWidth="59.20001220703125" style="-fx-alignment: center;" styleClass="column-header" text="Transcript" />
+            <TableColumn fx:id="fullnameColumn" prefWidth="73.59996795654297" style="-fx-alignment: center;" styleClass="column-header" text="Full name" />
+            <TableColumn fx:id="dateOfBirthColumn" style="-fx-alignment: center;" styleClass="column-header" text="Date of birth" />
+            <TableColumn fx:id="majorColumn" minWidth="0.800048828125" prefWidth="48.79998779296875" style="-fx-alignment: center;" styleClass="column-header" text="Major" />
+            <TableColumn fx:id="programColumn" prefWidth="79.20001220703125" style="-fx-alignment: center;" styleClass="column-header" text="Program" />
+            <TableColumn fx:id="gpaColumn" minWidth="8.0" prefWidth="56.00006103515625" style="-fx-alignment: center;" styleClass="column-header" text="GPA" />
+            <TableColumn fx:id="transcriptButtonColumn" maxWidth="100.0" minWidth="100.0" prefWidth="64.8001708984375" style="-fx-alignment: center;" styleClass="column-header" text="Transcript" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
