@@ -10,11 +10,11 @@
 
 <SplitPane fx:id="splitPane" dividerPositions="0.34792780748663094" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/HomePageStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomePageController">
   <items>
-    <AnchorPane minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #112B5F;">
+    <AnchorPane maxWidth="450.0" minHeight="400.0" minWidth="200.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: #112B5F;" SplitPane.resizableWithParent="false">
          <children>
             <Button fx:id="studentPaneButton" alignment="BASELINE_LEFT" layoutX="3.0" layoutY="96.0" mnemonicParsing="false" onAction="#studentPaneButtonOnAction" prefHeight="47.0" prefWidth="214.0" styleClass="homepageButton" stylesheets="@../css/HomePageStyle.css" text="Student" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.800000000000011">
                <padding>
-                  <Insets left="20.0" />
+                  <Insets left="30.0" />
                </padding>
                <font>
                   <Font size="22.0" />
@@ -29,7 +29,7 @@
             </Button>
             <Button fx:id="teacherPaneButton" alignment="BASELINE_LEFT" layoutX="3.0" layoutY="143.0" mnemonicParsing="false" onAction="#teacherPaneButtonOnAction" prefHeight="47.0" prefWidth="214.0" styleClass="homepageButton" stylesheets="@../css/HomePageStyle.css" text="Teacher" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.800000000000011">
                <padding>
-                  <Insets left="20.0" />
+                  <Insets left="30.0" />
                </padding>
                <font>
                   <Font size="22.0" />
@@ -42,14 +42,14 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ImageView fitHeight="75.0" fitWidth="76.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="75.0" fitWidth="76.0" layoutX="26.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Resource/IUlogo.png" />
                </image>
             </ImageView>
             <Button fx:id="informationPaneButton" alignment="BASELINE_LEFT" layoutX="3.0" layoutY="190.0" mnemonicParsing="false" onAction="#informationPaneButtonOnAction" prefHeight="47.0" prefWidth="214.0" styleClass="homepageButton" text="Information" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.800000000000011">
                <padding>
-                  <Insets left="20.0" />
+                  <Insets left="30.0" />
                </padding>
                <font>
                   <Font size="22.0" />
@@ -64,7 +64,7 @@
             </Button>
             <Button fx:id="settingPaneButton" alignment="BASELINE_LEFT" layoutX="3.0" layoutY="237.0" mnemonicParsing="false" onAction="#settingPaneButtonOnAction" prefHeight="47.0" prefWidth="214.0" styleClass="homepageButton" text="Setting" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.800000000000011">
                <padding>
-                  <Insets left="20.0" />
+                  <Insets left="30.0" />
                </padding>
                <font>
                   <Font size="22.0" />
@@ -78,6 +78,6 @@
                </graphic>
             </Button>
          </children></AnchorPane>
-    <AnchorPane fx:id="holderPane" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" />
+    <AnchorPane fx:id="holderPane" minHeight="400.0" minWidth="400.0" prefHeight="400.0" prefWidth="400.0" SplitPane.resizableWithParent="false" />
   </items>
 </SplitPane>

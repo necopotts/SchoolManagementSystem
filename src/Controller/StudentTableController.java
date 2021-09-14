@@ -53,6 +53,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -82,6 +83,8 @@ public class StudentTableController implements Initializable {
     @FXML
     private Button searchButton;
     @FXML
+    private Button deleteStudentButton;
+    @FXML
     private Text studentIDText;
     @FXML
     private Text fullnameText;
@@ -93,6 +96,8 @@ public class StudentTableController implements Initializable {
     private Text programText;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private TilePane infoStudentTilePane;
 
     private Student currentStudent;
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
@@ -108,6 +113,8 @@ public class StudentTableController implements Initializable {
         majorText.setText(currentStudent.getMajor());
         programText.setText(currentStudent.getProgram());
         editStudentButton.setDisable(false);
+        deleteStudentButton.setDisable(false);
+        infoStudentTilePane.setVisible(true);
 
     }
 
@@ -115,6 +122,8 @@ public class StudentTableController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         editStudentButton.setDisable(true);
+        deleteStudentButton.setDisable(true);
+        infoStudentTilePane.setVisible(false);
         loadData();
     }
 
@@ -170,10 +179,32 @@ public class StudentTableController implements Initializable {
         studentTable.getItems().clear();
         if (searchTextField.getText().isBlank()) {
             loadData();
+            exportButton.setDisable(false);
         } else {
             searchData();
+            exportButton.setDisable(true);
         }
 
+    }
+
+    public void deleteStudentButtonOnAction(ActionEvent event) {
+        removeStudent();
+        studentTable.getItems().clear();
+        loadData();
+    }
+
+    private void removeStudent() {
+        String deleteStudentQuery = "DELETE FROM Student WHERE studentID = ?";
+        try {
+            PreparedStatement preparedStatement = connectDatabase().prepareStatement(deleteStudentQuery);
+            preparedStatement.setInt(1, currentStudent.getStudentID());
+            preparedStatement.executeQuery();
+            currentStudent = null;
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void exportButtonOnAction(ActionEvent event) {

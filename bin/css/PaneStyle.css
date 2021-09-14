@@ -25,22 +25,26 @@
   -fx-text-fill: white;
 }
 
+.context-menu {
+  -fx-background-color: #091935;
+}
+
 .table-view .column-header {
   -fx-background-color: transparent;
 }
 
 .table-view .table-cell {
-  -fx-text-fill: white;
+  -fx-text-fill: black;
 }
 
 .table-row-cell {
-  -fx-background-color: -fx-table-cell-border-color, #1a4899;
+  -fx-background-color: -fx-table-cell-border-color, #b3b3b36b;
   -fx-background-insets: 0, 0 0 1 0;
   -fx-padding: 0em; /* 0 */
 }
 
 .table-row-cell:odd {
-  -fx-background-color: -fx-table-cell-border-color, #112b5f;
+  -fx-background-color: -fx-table-cell-border-color, #3262a171;
   -fx-background-insets: 0, 0 0 1 0;
   -fx-padding: 0em; /* 0 */
 }
@@ -49,6 +53,9 @@
   -fx-background-color: #091935;
   -fx-background-insets: 0;
   -fx-background-radius: 1;
+}
+.table-row-cell:selected .text {
+  -fx-fill: white;
 }
 
 .table-view > .virtual-flow > .scroll-bar:vertical,

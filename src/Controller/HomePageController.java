@@ -108,7 +108,12 @@ public class HomePageController implements Initializable {
 
         try {
             home = FXMLLoader.load(getClass().getResource(URL));
+            AnchorPane.setBottomAnchor(home, 0.0);
+            AnchorPane.setTopAnchor(home, 0.0);
+            AnchorPane.setLeftAnchor(home, 0.0);
+            AnchorPane.setRightAnchor(home, 0.0);
             setNode(home);
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
