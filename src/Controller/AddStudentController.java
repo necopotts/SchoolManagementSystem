@@ -3,15 +3,18 @@ package Controller;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import Model.DatabaseConnection;
+import Model.StudentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -73,25 +76,10 @@ public class AddStudentController implements Initializable {
 
         String studentName = fullnameTextField.getText();
         Date studentDateOfBirth = java.sql.Date.valueOf(dateOfBirthDatePicker.getValue());
-
         String studentMajor = majorChoiceBox.getValue().toString();
         String studentProgram = programChoiceBox.getValue().toString();
-        try {
-            PreparedStatement preparedStatement = connectDatabase().prepareStatement(
-                    "INSERT INTO Student(fullname,dateOfBirth,major,program) VALUES (?,?,?,?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, studentName);
-            preparedStatement.setDate(2, studentDateOfBirth);
-            preparedStatement.setString(3, studentMajor);
-            preparedStatement.setString(4, studentProgram);
-            preparedStatement.executeUpdate();
-            addMessage.setText("Student added");
 
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        StudentModel.addData(studentName, studentDateOfBirth, studentMajor, studentProgram);
     }
 
     public void resetButtonOnAction(ActionEvent event) {
@@ -116,12 +104,6 @@ public class AddStudentController implements Initializable {
         programChoiceBox.getItems().add("UN");
         programChoiceBox.getItems().add("UWE");
         programChoiceBox.getItems().add("DK");
-    }
-
-    public Connection connectDatabase() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDatabase = connectNow.getConnection();
-        return connectDatabase;
     }
 
 }

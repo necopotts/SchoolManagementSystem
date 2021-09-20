@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    public Connection connection;
+    private static Connection connection;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=IUManagementSystem";
         String username = "sa";
         String password = "sa";

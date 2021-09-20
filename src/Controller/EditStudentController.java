@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 import DAO.Student;
 import Model.DatabaseConnection;
+import Model.StudentModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -66,21 +67,12 @@ public class EditStudentController implements Initializable {
     }
 
     private void saveData() {
-        try {
-            String updateStudentQuery = "UPDATE Student SET fullname = ?, dateOfBirth = ?, major = ?, program = ? WHERE studentID = ?";
-            PreparedStatement preparedStatement = connectDatabase().prepareStatement(updateStudentQuery);
-            preparedStatement.setString(1, fullnameTextField.getText());
-            preparedStatement.setDate(2, Date.valueOf(dateOfBirthDatePicker.getValue()));
-            preparedStatement.setString(3, majorChoiceBox.getValue().toString());
-            preparedStatement.setString(4, programChoiceBox.getValue().toString());
-            preparedStatement.setInt(5, currentStudent.getStudentID());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+        Integer studentID = currentStudent.getStudentID();
+        String studentName = fullnameTextField.getText();
+        Date studentDateOfBirth = Date.valueOf(dateOfBirthDatePicker.getValue());
+        String studentMajor = majorChoiceBox.getValue().toString();
+        String studentProgram = programChoiceBox.getValue().toString();
+        StudentModel.saveData(studentID, studentName, studentDateOfBirth, studentMajor, studentProgram);
     }
 
     @FXML

@@ -8,13 +8,16 @@ public class Student {
     private Date dateOfBirth;
     private String major;
     private String program;
+    private Integer transcriptID;
 
-    public Student(Integer studentID, String fullname, Date dateOfBirth, String major, String program) {
+    public Student(Integer studentID, String fullname, Date dateOfBirth, String major, String program,
+            Integer transcriptID) {
         this.studentID = studentID;
         this.fullname = fullname;
         this.dateOfBirth = dateOfBirth;
         this.major = major;
         this.program = program;
+        this.transcriptID = transcriptID;
     }
 
     public Integer getStudentID() {
@@ -55,6 +58,14 @@ public class Student {
 
     public void setProgram(String program) {
         this.program = program;
+    }
+
+    public Integer getTranscriptID() {
+        return transcriptID;
+    }
+
+    public void setTranscriptID(Integer transcriptID) {
+        this.transcriptID = transcriptID;
     }
 
 }

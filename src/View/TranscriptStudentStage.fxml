@@ -12,14 +12,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TranscriptStudentController"> 
    <children>
-      <TilePane fx:id="infoStudentTilePane" layoutX="53.0" layoutY="88.0" prefColumns="0" prefHeight="111.0" prefWidth="480.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <TilePane fx:id="infoStudentTilePane" layoutX="53.0" layoutY="88.0" prefColumns="0" prefHeight="133.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <padding>
             <Insets left="60.0" />
          </padding>
          <children>
             <HBox prefHeight="20.0" prefWidth="419.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="82.0" text="Student ID">
+                  <Label prefHeight="18.0" prefWidth="82.0" text="Student ID:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -35,7 +35,7 @@
             </HBox>
             <HBox prefHeight="20.0" prefWidth="334.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="82.0" text="Full name">
+                  <Label prefHeight="18.0" prefWidth="82.0" text="Full name:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -48,7 +48,7 @@
             </HBox>
             <HBox prefHeight="20.0" prefWidth="334.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="82.0" text="Date of Birth">
+                  <Label prefHeight="18.0" prefWidth="82.0" text="Date of Birth:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -61,7 +61,7 @@
             </HBox>
             <HBox prefHeight="20.0" prefWidth="334.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="82.0" text="Major">
+                  <Label prefHeight="18.0" prefWidth="82.0" text="Major:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -74,12 +74,47 @@
             </HBox>
             <HBox prefHeight="20.0" prefWidth="334.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="82.0" text="Program">
+                  <Label prefHeight="18.0" prefWidth="82.0" text="Program:">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
                   <Text fx:id="programText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="229.33674204349518" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox maxWidth="516.0" prefHeight="20.0" prefWidth="516.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="46.0" text="GPA:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Text fx:id="studentIDText1" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="59.736709237098694" />
+                  <Label prefHeight="18.0" prefWidth="80.0" text="Total credits:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="studentIDText12" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.33668863773346" />
+                  <Label prefHeight="18.0" prefWidth="87.0" text="Classification:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="70.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Text fx:id="studentIDText11" strokeType="OUTSIDE" strokeWidth="0.0" text="Very good" wrappingWidth="66.93671762943268">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
                </children>
                <padding>
                   <Insets left="10.0" />

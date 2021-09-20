@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
+import Model.DataModel;
+import Model.StudentModel;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +45,7 @@ public class HomePageController implements Initializable {
 
     public void studentPaneButtonOnAction(ActionEvent event) {
 
-        createPage("/View/StudentPane.fxml");
+        createPage(1);
 
         Control control = (Control) event.getSource();
         changeClickedButtonColor(control.getId());
@@ -52,7 +54,7 @@ public class HomePageController implements Initializable {
 
     public void teacherPaneButtonOnAction(ActionEvent event) {
 
-        createPage("/View/TeacherPane.fxml");
+        createPage(2);
 
         Control control = (Control) event.getSource();
         changeClickedButtonColor(control.getId());
@@ -104,10 +106,35 @@ public class HomePageController implements Initializable {
 
     }
 
-    private void createPage(String URL) {
+    private void createPage(Integer decision) {
 
         try {
-            home = FXMLLoader.load(getClass().getResource(URL));
+            String URL;
+
+            switch (decision) {
+                case 1:
+                    URL = "/View/StudentPane.fxml";
+                    StudentModel studentModel = new StudentModel();
+                    StudentTableController controller = new StudentTableController();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(URL));
+                    home = loader.load();
+                    controller = loader.getController();
+                    controller.initModel(studentModel);
+                    break;
+                case 2:
+                    URL = "/View/TeacherPane.fxml";
+                    break;
+                case 3:
+                    URL = "";
+                    break;
+                case 4:
+                    URL = "";
+                    break;
+                default:
+                    URL = "";
+                    System.out.println("Out of cases");
+            }
+
             AnchorPane.setBottomAnchor(home, 0.0);
             AnchorPane.setTopAnchor(home, 0.0);
             AnchorPane.setLeftAnchor(home, 0.0);

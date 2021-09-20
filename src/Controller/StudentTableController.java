@@ -35,7 +35,9 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.stress.SpreadsheetHandler;
 
 import DAO.Student;
+import Model.DataModel;
 import Model.DatabaseConnection;
+import Model.StudentModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -64,7 +66,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.converter.LocalDateStringConverter;
 
-public class StudentTableController implements Initializable {
+public class StudentTableController extends Controller implements Initializable {
 
     @FXML
     private TableView<Student> studentTable;
@@ -107,6 +109,7 @@ public class StudentTableController implements Initializable {
 
     private Student currentStudent;
     private ObservableList<Student> studentList = FXCollections.observableArrayList();
+    private StudentModel studentModel;
 
     private HashMap<String, CellStyle> cellStyles;
 
@@ -118,6 +121,7 @@ public class StudentTableController implements Initializable {
         dateOfBirthText.setText(currentStudent.getDateOfBirth().toString());
         majorText.setText(currentStudent.getMajor());
         programText.setText(currentStudent.getProgram());
+        studentModel.setCurrentPerson(currentStudent);
         editStudentButton.setDisable(false);
         deleteStudentButton.setDisable(false);
         infoStudentTilePane.setVisible(true);
@@ -130,6 +134,15 @@ public class StudentTableController implements Initializable {
         editStudentButton.setDisable(true);
         deleteStudentButton.setDisable(true);
         infoStudentTilePane.setVisible(false);
+
+    }
+
+    public void initModel(StudentModel studentModel) {
+        // TODO Auto-generated method stub
+        if (this.studentModel != null) {
+            throw new IllegalStateException("Model can only initialize once");
+        }
+        this.studentModel = studentModel;
         loadData();
     }
 
@@ -187,29 +200,21 @@ public class StudentTableController implements Initializable {
             loadData();
             exportButton.setDisable(false);
         } else {
-            searchData();
+            String searchKeyword = searchTextField.getText();
+            studentList = studentModel.searchData(searchKeyword);
             exportButton.setDisable(true);
         }
 
     }
 
     public void deleteStudentButtonOnAction(ActionEvent event) {
-        removeStudent();
-        studentTable.getItems().clear();
-        loadData();
-    }
+        if (currentStudent != null) {
+            Integer studentID = currentStudent.getStudentID();
+            studentModel.deleteData(studentID);
+            studentTable.getItems().clear();
+            loadData();
+        } else {
 
-    private void removeStudent() {
-        String deleteStudentQuery = "DELETE FROM Student WHERE studentID = ?";
-        try {
-            PreparedStatement preparedStatement = connectDatabase().prepareStatement(deleteStudentQuery);
-            preparedStatement.setInt(1, currentStudent.getStudentID());
-            preparedStatement.executeQuery();
-            currentStudent = null;
-
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
 
@@ -303,40 +308,6 @@ public class StudentTableController implements Initializable {
 
     }
 
-    private void searchData() {
-        String searchQuery;
-        String searchKeyWord = searchTextField.getText();
-        try {
-            PreparedStatement preparedStatement;
-            if (isNumeric(searchKeyWord)) {
-                searchQuery = "SELECT * FROM Student WHERE studentID = ?";
-                preparedStatement = connectDatabase().prepareStatement(searchQuery);
-                preparedStatement.setInt(1, Integer.valueOf(searchKeyWord));
-            } else {
-                searchQuery = "SELECT * FROM Student WHERE fullname LIKE ? OR major LIKE ? OR program LIKE ?";
-                preparedStatement = connectDatabase().prepareStatement(searchQuery);
-                preparedStatement.setString(1, "%" + searchKeyWord + "%");
-                preparedStatement.setString(2, "%" + searchKeyWord + "%");
-                preparedStatement.setString(3, "%" + searchKeyWord + "%");
-            }
-
-            ResultSet searchResult = preparedStatement.executeQuery();
-            while (searchResult.next()) {
-                // Retrieve student in each row and add it to the student list
-                Student student = new Student(searchResult.getInt("studentID"), searchResult.getString("fullname"),
-                        searchResult.getDate("dateOfBirth"), searchResult.getString("major"),
-                        searchResult.getString("program"));
-                studentList.add(student);
-                // Set it to each row of the table
-                studentTable.setItems(studentList);
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-    }
-
     private void loadData() {
         studentIdColumn.setCellValueFactory(new PropertyValueFactory<>("studentID"));
         fullnameColumn.setCellValueFactory(new PropertyValueFactory<>("fullname"));
@@ -344,26 +315,8 @@ public class StudentTableController implements Initializable {
         majorColumn.setCellValueFactory(new PropertyValueFactory<>("major"));
         programColumn.setCellValueFactory(new PropertyValueFactory<>("program"));
 
-        String studentRetrieveDataQuery = "SELECT * FROM Student";
-        try {
-            PreparedStatement preparedStatement = connectDatabase().prepareStatement(studentRetrieveDataQuery);
-            ResultSet studentData = preparedStatement.executeQuery();
-
-            while (studentData.next()) {
-                // Retrieve student in each row and add it to the student list
-                Student student = new Student(studentData.getInt("studentID"), studentData.getString("fullname"),
-                        studentData.getDate("dateOfBirth"), studentData.getString("major"),
-                        studentData.getString("program"));
-                studentList.add(student);
-                // Set it to each row of the table
-                studentTable.setItems(studentList);
-
-            }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            System.out.println("cannot access to the database");
-            e.printStackTrace();
-        }
+        studentList = this.studentModel.getStudentList();
+        studentTable.setItems(studentList);
         addButtonToTable();
     }
 
@@ -420,12 +373,6 @@ public class StudentTableController implements Initializable {
 
         transcriptButtonColumn.setCellFactory(cellFactory);
 
-    }
-
-    public Connection connectDatabase() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDatabase = connectNow.getConnection();
-        return connectDatabase;
     }
 
     public String convertFromBackslashToSlash(String string) {
